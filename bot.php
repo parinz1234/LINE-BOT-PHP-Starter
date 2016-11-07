@@ -15,19 +15,24 @@ $body = file_get_contents("php://input");
 $events = $bot->parseEventRequest($body, $signature);
 
 foreach ($events as $event) {
+	//reply same message
     if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
         $reply_token = $event->getReplyToken();
         $text = $event->getText();
-        $bot->replyText($reply_token, $text);
+		if($text =='หิวข้าว'){
+			$bot->replyText($reply_token, "ก็ไปกินดิ๊");
+		}
+		else{
+			$bot->replyText($reply_token, $text);
+		}
     }
+	//reply same sticker
 	else if($event instanceof \LINE\LINEBot\Event\MessageEvent\StickerMessage){
 		$reply_token = $event->getReplyToken();
 		$package_id = $event->getPackageId();
 		$sticker_id = $event->getStickerId();
-		// $StickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($package_id, $sticker_id);
-		// $bot->replyMessage($reply_token, $StickerMessageBuilder);
-		$bot->replyText($reply_token,'package id is '.$package_id.' and sticker id is '.$sticker_id);
-		$bot->replyText($reply_token,'package id is '.$package_id.' and sticker id is '.$sticker_id);
+		$StickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($package_id, $sticker_id);
+		$bot->replyMessage($reply_token, $StickerMessageBuilder);
 	}
 }
 
