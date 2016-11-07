@@ -5,7 +5,7 @@ $channel_secret = '67cb08f294253a10921b1acf17cb3598';
 define("LINE_MESSAGING_API_CHANNEL_SECRET", $channel_secret);
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", $access_token);
 
-require __DIR__."/../vendor/autoload.php";
+require __DIR__."vendor/autoload.php";
 
 $bot = new \LINE\LINEBot(
     new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN),
