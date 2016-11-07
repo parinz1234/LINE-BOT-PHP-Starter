@@ -7,11 +7,8 @@ define("LINE_MESSAGING_API_CHANNEL_TOKEN", $access_token);
 
 require __DIR__."/vendor/autoload.php";
 
-$bot = new \LINE\LINEBot(
-    new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN),
-    ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]
-);
-
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
+$bot = new \LINE\LINEBot($httpClient,['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $body = file_get_contents("php://input");
 
