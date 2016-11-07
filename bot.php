@@ -15,7 +15,6 @@ $body = file_get_contents("php://input");
 $events = $bot->parseEventRequest($body, $signature);
 
 foreach ($events as $event) {
-	//reply same message
     if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
         $reply_token = $event->getReplyToken();
         $text = $event->getText();
@@ -23,6 +22,7 @@ foreach ($events as $event) {
 			$bot->replyText($reply_token, "ก็ไปกินดิ๊");
 		}
 		else{
+			//reply same message
 			$bot->replyText($reply_token, $text);
 		}
     }
