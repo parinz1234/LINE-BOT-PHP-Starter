@@ -20,6 +20,12 @@ foreach ($events as $event) {
         $text = $event->getText();
         $bot->replyText($reply_token, $text);
     }
+	else if($event instanceof \LINE\LINEBot\Event\MessageEvent\StickerMessage){
+		$reply_token = $event->getReplyToken();
+		$package_id = $event->getPackageId();
+		$sticker_id = $event->getStickerId();
+		$bot->replyText($reply_token,'package id is '.$package_id.' and sticker id is '.$sticker_id);
+	}
 }
 
 echo "OK";
