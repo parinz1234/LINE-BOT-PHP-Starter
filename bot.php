@@ -27,7 +27,15 @@ if (!is_null($events['events'])) {
 				'text' => $text
 			];
 
-			$response = $bot->replyText($replyToken, 'hello!');
+			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+			if ($response->isSucceeded()) {
+			echo 'Succeeded!';
+			return;
+			}
+
+			// Failed
+			echo $response->getHTTPStatus . ' ' . $response->getRawBody();
 			// // Make a POST Request to Messaging API to reply to sender
 			// $url = 'https://api.line.me/v2/bot/message/reply';
 			// $data = [
