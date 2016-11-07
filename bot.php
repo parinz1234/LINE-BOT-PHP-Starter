@@ -24,9 +24,9 @@ foreach ($events as $event) {
 		$reply_token = $event->getReplyToken();
 		$package_id = $event->getPackageId();
 		$sticker_id = $event->getStickerId();
-		$bot->replyText($reply_token,'package id is '.$package_id.' and sticker id is '.$sticker_id);
 		$StickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($package_id, $sticker_id);
 		$bot->replyMessage($reply_token, $StickerMessageBuilder);
+		$bot->replyText($reply_token,'package id is '.$package_id.' and sticker id is '.$sticker_id);
 	}
 }
 
