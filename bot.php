@@ -9,34 +9,34 @@ require __DIR__."/vendor/autoload.php";
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
 $bot = new \LINE\LINEBot($httpClient,['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
-// $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-// $body = file_get_contents("php://input");
+$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$body = file_get_contents("php://input");
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-$response = $bot->pushMessage('<to>', $textMessageBuilder);
+// $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+// $response = $bot->pushMessage('<to>', $textMessageBuilder);
 
-// $events = $bot->parseEventRequest($body, $signature);
-//
-// foreach ($events as $event) {
-//     if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
-//         $reply_token = $event->getReplyToken();
-//         $text = $event->getText();
-// 		if($text =='หิวข้าว'){
-// 			$bot->replyText($reply_token, "ก็ไปกินดิ๊");
-// 		}
-// 		else{
-// 			//reply same message
-// 			$bot->replyText($reply_token, $text);
-// 		}
-//     }
-// 	//reply same sticker
-// 	else if($event instanceof \LINE\LINEBot\Event\MessageEvent\StickerMessage){
-// 		$reply_token = $event->getReplyToken();
-// 		$package_id = $event->getPackageId();
-// 		$sticker_id = $event->getStickerId();
-// 		$StickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($package_id, $sticker_id);
-// 		$bot->replyMessage($reply_token, $StickerMessageBuilder);
-// 	}
-// }
+$events = $bot->parseEventRequest($body, $signature);
+
+foreach ($events as $event) {
+    if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
+        $reply_token = $event->getReplyToken();
+        $text = $event->getText();
+		if($text =='หิวข้าว'){
+			$bot->replyText($reply_token, "ก็ไปกินดิ๊");
+		}
+		else{
+			//reply same message
+			$bot->replyText($reply_token, $event->getUserId());
+		}
+    }
+	//reply same sticker
+	else if($event instanceof \LINE\LINEBot\Event\MessageEvent\StickerMessage){
+		$reply_token = $event->getReplyToken();
+		$package_id = $event->getPackageId();
+		$sticker_id = $event->getStickerId();
+		$StickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($package_id, $sticker_id);
+		$bot->replyMessage($reply_token, $StickerMessageBuilder);
+	}
+}
 
 echo "OK";
