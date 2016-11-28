@@ -15,7 +15,7 @@ $bot = new \LINE\LINEBot($httpClient,['channelSecret' => LINE_MESSAGING_API_CHAN
 //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
 //$response = $bot->pushMessage('U55239b363894dc705cdb841d6c106493', $textMessageBuilder);
 
-$response = $bot->getProfile('U55239b363894dc705cdb841d6c106493');
+$response = $bot->getProfile('olan3925');
 if ($response->isSucceeded()) {
     $profile = $response->getJSONDecodedBody();
     echo $profile['displayName']."<br>";
