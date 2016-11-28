@@ -12,9 +12,16 @@ $bot = new \LINE\LINEBot($httpClient,['channelSecret' => LINE_MESSAGING_API_CHAN
 // $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 // $body = file_get_contents("php://input");
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-$response = $bot->pushMessage('U55239b363894dc705cdb841d6c106493', $textMessageBuilder);
+//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+//$response = $bot->pushMessage('U55239b363894dc705cdb841d6c106493', $textMessageBuilder);
 
+$response = $bot->getProfile('U55239b363894dc705cdb841d6c106493');
+if ($response->isSucceeded()) {
+    $profile = $response->getJSONDecodedBody();
+    echo $profile['displayName'];
+    echo $profile['pictureUrl'];
+    echo $profile['statusMessage'];
+}
 // $events = $bot->parseEventRequest($body, $signature);
 //
 // foreach ($events as $event) {
