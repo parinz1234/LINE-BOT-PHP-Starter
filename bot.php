@@ -18,9 +18,9 @@ $bot = new \LINE\LINEBot($httpClient,['channelSecret' => LINE_MESSAGING_API_CHAN
 $response = $bot->getProfile('U55239b363894dc705cdb841d6c106493');
 if ($response->isSucceeded()) {
     $profile = $response->getJSONDecodedBody();
-    echo $profile['displayName'];
-    echo $profile['pictureUrl'];
-    echo $profile['statusMessage'];
+    echo $profile['displayName']."<br>";
+    echo $profile['pictureUrl']."<br>";
+    echo $profile['statusMessage']."<br>";
 }
 // $events = $bot->parseEventRequest($body, $signature);
 //
